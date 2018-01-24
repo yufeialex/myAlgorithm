@@ -15,6 +15,7 @@ public class Problem_01_GetMinStack {
         public void push(int newNum) {
             if (this.stackMin.isEmpty()) {
                 this.stackMin.push(newNum);
+                // 这里的小于等于是关键，因为数据栈有可能连续几个数字相等。
             } else if (newNum <= this.getmin()) {
                 this.stackMin.push(newNum);
             }

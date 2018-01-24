@@ -4,6 +4,7 @@ import java.util.Stack;
 
 public class Problem_05_StackSortStack {
 
+    // 一个来回倒腾的游戏
     public static void sortStackByStack(Stack<Integer> stack) {
         Stack<Integer> help = new Stack<Integer>();
         while (!stack.isEmpty()) {
