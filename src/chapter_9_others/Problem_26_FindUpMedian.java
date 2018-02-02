@@ -2,6 +2,7 @@ package chapter_9_others;
 
 import java.util.Arrays;
 
+// 用归并来找，简单，时间复杂度是O(m+n)
 public class Problem_26_FindUpMedian {
 
     public static int getUpMedian(int[] arr1, int[] arr2) {
