@@ -2,7 +2,7 @@ package chapter_4_recursionanddp;
 
 public class Problem_09_EditCost {
 
-    public static int minCost1(String str1, String str2, int ic, int dc, int rc) {
+    public static int minCost1(String str1, String str2, int ic, int rV, int rc) {
         if (str1 == null || str2 == null) {
             return 0;
         }
@@ -12,7 +12,7 @@ public class Problem_09_EditCost {
         int col = chs2.length + 1;
         int[][] dp = new int[row][col];
         for (int i = 1; i < row; i++) {
-            dp[i][0] = dc * i;
+            dp[i][0] = rV * i;
         }
         for (int j = 1; j < col; j++) {
             dp[0][j] = ic * j;
@@ -25,13 +25,13 @@ public class Problem_09_EditCost {
                     dp[i][j] = dp[i - 1][j - 1] + rc;
                 }
                 dp[i][j] = Math.min(dp[i][j], dp[i][j - 1] + ic);
-                dp[i][j] = Math.min(dp[i][j], dp[i - 1][j] + dc);
+                dp[i][j] = Math.min(dp[i][j], dp[i - 1][j] + rV);
             }
         }
         return dp[row - 1][col - 1];
     }
 
-    public static int minCost2(String str1, String str2, int ic, int dc, int rc) {
+    public static int minCost2(String str1, String str2, int ic, int rV, int rc) {
         if (str1 == null || str2 == null) {
             return 0;
         }
@@ -39,10 +39,10 @@ public class Problem_09_EditCost {
         char[] chs2 = str2.toCharArray();
         char[] longs = chs1.length >= chs2.length ? chs1 : chs2;
         char[] shorts = chs1.length < chs2.length ? chs1 : chs2;
-        if (chs1.length < chs2.length) { // str2�ϳ��ͽ���ic��dc��ֵ
+        if (chs1.length < chs2.length) { // str2�ϳ��ͽ���ic��rV��ֵ
             int tmp = ic;
-            ic = dc;
-            dc = tmp;
+            ic = rV;
+            rV = tmp;
         }
         int[] dp = new int[shorts.length + 1];
         for (int i = 1; i <= shorts.length; i++) {
@@ -50,7 +50,7 @@ public class Problem_09_EditCost {
         }
         for (int i = 1; i <= longs.length; i++) {
             int pre = dp[0]; // pre��ʾ���Ͻǵ�ֵ
-            dp[0] = dc * i;
+            dp[0] = rV * i;
             for (int j = 1; j <= shorts.length; j++) {
                 int tmp = dp[j]; // dp[j]û����ǰ�ȱ�������
                 if (longs[i - 1] == shorts[j - 1]) {
@@ -59,7 +59,7 @@ public class Problem_09_EditCost {
                     dp[j] = pre + rc;
                 }
                 dp[j] = Math.min(dp[j], dp[j - 1] + ic);
-                dp[j] = Math.min(dp[j], tmp + dc);
+                dp[j] = Math.min(dp[j], tmp + rV);
                 pre = tmp; // pre���dp[j]û����ǰ��ֵ
             }
         }

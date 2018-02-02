@@ -50,22 +50,22 @@ public class Problem_08_LCSubstring {
         }
         char[] chs1 = str1.toCharArray();
         char[] chs2 = str2.toCharArray();
-        int row = 0; // б�߿�ʼλ�õ���
-        int col = chs2.length - 1; // б�߿�ʼλ�õ���
-        int max = 0; // ��¼��󳤶�
-        int end = 0; // ��󳤶ȸ���ʱ����¼�Ӵ��Ľ�βλ��
+        int row = 0; // 斜线开始位置的行
+        int col = chs2.length - 1; // 斜线开始位置的列
+        int max = 0; // 记录最大长度
+        int end = 0; // 最大长度更新时，记录子串的结尾位置
         while (row < chs1.length) {
             int i = row;
             int j = col;
             int len = 0;
-            // ��(i,j)��ʼ�����·�����
+            // 从(i,j)开始向右下方遍历
             while (i < chs1.length && j < chs2.length) {
                 if (chs1[i] != chs2[j]) {
                     len = 0;
                 } else {
                     len++;
                 }
-                // ��¼���ֵ���Լ������ַ���λ��
+                // 记录最大值，以及结束字符的位置
                 if (len > max) {
                     end = i;
                     max = len;
@@ -73,9 +73,9 @@ public class Problem_08_LCSubstring {
                 i++;
                 j++;
             }
-            if (col > 0) { // б�߿�ʼλ�õ����������ƶ�
+            if (col > 0) { // 斜线开始位置的列先向左移动
                 col--;
-            } else { // ���ƶ�������֮���������ƶ�
+            } else { // 列移动到最左之后，行向下移动
                 row++;
             }
         }

@@ -3,33 +3,33 @@ package chapter_8_arrayandmatrix;
 public class Problem_03_ZigZagPrintMatrix {
 
     public static void printMatrixZigZag(int[][] matrix) {
-        int tR = 0;
-        int tC = 0;
-        int dR = 0;
-        int dC = 0;
+        int lH = 0;
+        int lV = 0;
+        int rH = 0;
+        int rV = 0;
         int endR = matrix.length - 1;
         int endC = matrix[0].length - 1;
         boolean fromUp = false;
-        while (tR != endR + 1) {
-            printLevel(matrix, tR, tC, dR, dC, fromUp);
-            tR = tC == endC ? tR + 1 : tR;
-            tC = tC == endC ? tC : tC + 1;
-            dC = dR == endR ? dC + 1 : dC;
-            dR = dR == endR ? dR : dR + 1;
+        while (lH != endR + 1) {
+            printLevel(matrix, lH, lV, rH, rV, fromUp);
+            lH = lV == endC ? lH + 1 : lH;
+            lV = lV == endC ? lV : lV + 1;
+            rV = rH == endR ? rV + 1 : rV;
+            rH = rH == endR ? rH : rH + 1;
             fromUp = !fromUp;
         }
         System.out.println();
     }
 
-    public static void printLevel(int[][] m, int tR, int tC, int dR, int dC,
+    public static void printLevel(int[][] m, int lH, int lV, int rH, int rV,
                                   boolean f) {
         if (f) {
-            while (tR != dR + 1) {
-                System.out.print(m[tR++][tC--] + " ");
+            while (lH != rH + 1) {
+                System.out.print(m[lH++][lV--] + " ");
             }
         } else {
-            while (dR != tR - 1) {
-                System.out.print(m[dR--][dC++] + " ");
+            while (rH != lH - 1) {
+                System.out.print(m[rH--][rV++] + " ");
             }
         }
     }

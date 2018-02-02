@@ -57,14 +57,14 @@ public class Problem_16_ZeroLeftOneStringNumber {
         int[][] tmp = m;
         for (; p != 0; p >>= 1) {
             if ((p & 1) != 0) {
-                res = muliMatrix(res, tmp);
+                res = multiMatrix(res, tmp);
             }
-            tmp = muliMatrix(tmp, tmp);
+            tmp = multiMatrix(tmp, tmp);
         }
         return res;
     }
 
-    public static int[][] muliMatrix(int[][] m1, int[][] m2) {
+    public static int[][] multiMatrix(int[][] m1, int[][] m2) {
         int[][] res = new int[m1.length][m2[0].length];
         for (int i = 0; i < m1.length; i++) {
             for (int j = 0; j < m2[0].length; j++) {

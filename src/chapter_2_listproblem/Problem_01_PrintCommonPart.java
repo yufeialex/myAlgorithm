@@ -11,6 +11,12 @@ public class Problem_01_PrintCommonPart {
         }
     }
 
+    /**
+     * 代码实现上，对于最原始想法的改进：
+     * 不管是寻找共同起点，还是打印数据，都是到链表结尾为止；
+     * 不同之处在于：寻找起点是一个链表移动，打印是两个都移动；
+     * 那么就可以用一个共同的循环条件，内部根据条件判断，是一个移动还是两个移动
+     */
     public static void printCommonPart(Node head1, Node head2) {
         System.out.print("Common Part: ");
         while (head1 != null && head2 != null) {
@@ -53,5 +59,8 @@ public class Problem_01_PrintCommonPart {
         printCommonPart(node1, node2);
 
     }
+
+
+
 
 }

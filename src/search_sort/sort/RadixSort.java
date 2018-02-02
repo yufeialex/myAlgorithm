@@ -2,6 +2,7 @@ package search_sort.sort;
 
 
 import java.util.LinkedList;
+
 /**1344
  *
  * ge:1344%10=1344/1%10

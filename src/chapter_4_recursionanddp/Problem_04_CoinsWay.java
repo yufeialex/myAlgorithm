@@ -9,6 +9,7 @@ public class Problem_04_CoinsWay {
         return process1(arr, 0, aim);
     }
 
+    // 使用从index开始的面值的钱组成aim
     public static int process1(int[] arr, int index, int aim) {
         int res = 0;
         if (index == arr.length) {
@@ -21,14 +22,19 @@ public class Problem_04_CoinsWay {
         return res;
     }
 
+    // 初始化的数组状态是0，表示没计算过；如果某个状态没有结果，用-1表示；
+    // 分析递归函数的状态可以由哪些变量表示，做出相应维度和大小的map即可。
     public static int coins2(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
             return 0;
         }
+        // 这里第一个参数加一是因为有一种不用钱的情况；这种情况map的第一参数就是arr.length
+        // 第二个参数加一是因为从0到aim都有可能
         int[][] map = new int[arr.length + 1][aim + 1];
         return process2(arr, 0, aim, map);
     }
 
+    // 使用从index开始的面值的钱组成aim
     public static int process2(int[] arr, int index, int aim, int[][] map) {
         int res = 0;
         if (index == arr.length) {
@@ -48,6 +54,15 @@ public class Problem_04_CoinsWay {
         return res;
     }
 
+    /**
+     * dp[i][j]含义是使用arr[0..i]货币情况下，组成钱数j有多少种方法。
+     * 这个数组中的i和上面记忆搜索的i含义不一样，注意区分。
+     *
+     * 动态规划计算顺序，记忆搜索不需要。
+     * @param arr
+     * @param aim
+     * @return
+     */
     public static int coins3(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
             return 0;
@@ -114,7 +129,7 @@ public class Problem_04_CoinsWay {
 
         long start = 0;
         long end = 0;
-        System.out.println("===========�����ݹ�ķ���===========");
+        System.out.println("===========暴力递归的方法===========");
         start = System.currentTimeMillis();
         System.out.println(coins1(coins, aim));
         end = System.currentTimeMillis();
@@ -122,25 +137,25 @@ public class Problem_04_CoinsWay {
 
         aim = 20000;
 
-        System.out.println("===========���������ķ���===========");
+        System.out.println("===========记忆搜索的方法===========");
         start = System.currentTimeMillis();
         System.out.println(coins2(coins, aim));
         end = System.currentTimeMillis();
         System.out.println("cost time : " + (end - start) + "(ms)");
 
-        System.out.println("=====��̬�滮O(N*(aim^2))�ķ���=====");
+        System.out.println("=====动态规划O(N*(aim^2))的方法=====");
         start = System.currentTimeMillis();
         System.out.println(coins3(coins, aim));
         end = System.currentTimeMillis();
         System.out.println("cost time : " + (end - start) + "(ms)");
 
-        System.out.println("=======��̬�滮O(N*aim)�ķ���=======");
+        System.out.println("=======动态规划O(N*aim)的方法=======");
         start = System.currentTimeMillis();
         System.out.println(coins4(coins, aim));
         end = System.currentTimeMillis();
         System.out.println("cost time : " + (end - start) + "(ms)");
 
-        System.out.println("====��̬�滮O(N*aim)�ķ���+�ռ�ѹ��===");
+        System.out.println("====动态规划O(N*aim)的方法+空间压缩===");
         start = System.currentTimeMillis();
         System.out.println(coins5(coins, aim));
         end = System.currentTimeMillis();

@@ -35,6 +35,8 @@ public class Problem_07_IsPalindromeList {
         if (head == null || head.next == null) {
             return true;
         }
+        // 这里是最关键的，对于 1 2 3 3 2 1 这种偶数的，如果right开始也等于首节点，那么right用于是第一个3，就是中间偏左那个位置，
+        // 对于本题，一定要是偏右的才行；所以可以让right先走一步！！
         Node right = head.next;
         Node cur = head;
         while (cur.next != null && cur.next.next != null) {
@@ -109,7 +111,7 @@ public class Problem_07_IsPalindromeList {
     public static void main(String[] args) {
 
         Node head = null;
-        printLinkedList(head);
+        /*printLinkedList(head);
         System.out.print(isPalindrome1(head) + " | ");
         System.out.print(isPalindrome2(head) + " | ");
         System.out.println(isPalindrome3(head) + " | ");
@@ -171,7 +173,7 @@ public class Problem_07_IsPalindromeList {
         System.out.print(isPalindrome2(head) + " | ");
         System.out.println(isPalindrome3(head) + " | ");
         printLinkedList(head);
-        System.out.println("=========================");
+        System.out.println("=========================");*/
 
         head = new Node(1);
         head.next = new Node(2);

@@ -65,12 +65,17 @@ public class Problem_01_PreInPosTraversal {
         if (head != null) {
             Stack<Node> stack = new Stack<Node>();
             while (!stack.isEmpty() || head != null) {
+                // 只要节点存在，就应该把自己存进去，然后再看左节点的情况
                 if (head != null) {
                     stack.push(head);
                     head = head.left;
                 } else {
+                    // 弹出的head有两种情况：1.是之前head的父节点，这种是左节点为空进来的。2、是之前节点爷节点，这种是右节点为空进来的。
+                    // 右节点为空会连续两次进入这个分支
                     head = stack.pop();
+                    // 节点身份可以互换；这里打印的永远是中心节点
                     System.out.print(head.value + " ");
+                    // 准备把右节点放进去
                     head = head.right;
                 }
             }

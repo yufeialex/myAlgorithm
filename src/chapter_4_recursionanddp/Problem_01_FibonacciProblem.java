@@ -1,5 +1,7 @@
 package chapter_4_recursionanddp;
 
+import java.util.HashMap;
+
 public class Problem_01_FibonacciProblem {
 
     public static int f1(int n) {
@@ -42,23 +44,23 @@ public class Problem_01_FibonacciProblem {
         return res[0][0] + res[1][0];
     }
 
-    public static int[][] matrixPower(int[][] m, int p) {
+    public static int[][] matrixPower(int[][] m, int power) {
         int[][] res = new int[m.length][m[0].length];
-        // �Ȱ�res��Ϊ��λ��������������е�1��
+        // 先把res设为单位矩阵，相等于整数中的1。
         for (int i = 0; i < res.length; i++) {
             res[i][i] = 1;
         }
         int[][] tmp = m;
-        for (; p != 0; p >>= 1) {
-            if ((p & 1) != 0) {
-                res = muliMatrix(res, tmp);
+        for (; power != 0; power >>= 1) {
+            if ((power & 1) != 0) {
+                res = multiMatrix(res, tmp);
             }
-            tmp = muliMatrix(tmp, tmp);
+            tmp = multiMatrix(tmp, tmp);
         }
         return res;
     }
 
-    public static int[][] muliMatrix(int[][] m1, int[][] m2) {
+    public static int[][] multiMatrix(int[][] m1, int[][] m2) {
         int[][] res = new int[m1.length][m2[0].length];
         for (int i = 0; i < m1.length; i++) {
             for (int j = 0; j < m2[0].length; j++) {
@@ -80,6 +82,7 @@ public class Problem_01_FibonacciProblem {
         return s1(n - 1) + s1(n - 2);
     }
 
+    // 这种就是动态规划算法！
     public static int s2(int n) {
         if (n < 1) {
             return 0;
@@ -96,6 +99,24 @@ public class Problem_01_FibonacciProblem {
             pre = tmp;
         }
         return res;
+    }
+
+    // 记忆法
+    public static int s4(int n) {
+        if (n < 1) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return n;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        if(map.containsKey(n)) {
+            return map.get(n);
+        } else {
+            int value = s4(n-1) + s4(n-2);
+            map.put(n, value);
+            return value;
+        }
     }
 
     public static int s3(int n) {

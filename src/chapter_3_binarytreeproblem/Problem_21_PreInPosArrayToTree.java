@@ -25,15 +25,25 @@ public class Problem_21_PreInPosArrayToTree {
         return preIn(pre, 0, pre.length - 1, in, 0, in.length - 1, map);
     }
 
-    public static Node preIn(int[] p, int pi, int pj, int[] n, int ni, int nj,
-                             HashMap<Integer, Integer> map) {
-        if (pi > pj) {
+    /**
+     *
+     * @param pre 前序数组
+     * @param preFirst 前序第一个节点的index
+     * @param preLast 前序最后一个节点的index
+     * @param in 中序数组
+     * @param inFirst 中序第一个节点的index
+     * @param inLast 中序最后一个节点的index
+     * @param map 中序的哈希数组
+     * @return
+     */
+    public static Node preIn(int[] pre, int preFirst, int preLast, int[] in, int inFirst, int inLast, HashMap<Integer, Integer> map) {
+        if (preFirst > preLast) {
             return null;
         }
-        Node head = new Node(p[pi]);
-        int index = map.get(p[pi]);
-        head.left = preIn(p, pi + 1, pi + index - ni, n, ni, index - 1, map);
-        head.right = preIn(p, pi + index - ni + 1, pj, n, index + 1, nj, map);
+        Node head = new Node(pre[preFirst]);
+        int index = map.get(pre[preFirst]);
+        head.left = preIn(pre, preFirst + 1, preFirst + index - inFirst, in, inFirst, index - 1, map);
+        head.right = preIn(pre, preFirst + index - inFirst + 1, preLast, in, index + 1, inLast, map);
         return head;
     }
 
@@ -48,19 +58,18 @@ public class Problem_21_PreInPosArrayToTree {
         return inPos(in, 0, in.length - 1, pos, 0, pos.length - 1, map);
     }
 
-    public static Node inPos(int[] n, int ni, int nj, int[] s, int si, int sj,
-                             HashMap<Integer, Integer> map) {
-        if (si > sj) {
+    public static Node inPos(int[] in, int inFirst, int inLast, int[] pos, int posFirst, int posLast, HashMap<Integer, Integer> map) {
+        if (posFirst > posLast) {
             return null;
         }
-        Node head = new Node(s[sj]);
-        int index = map.get(s[sj]);
-        head.left = inPos(n, ni, index - 1, s, si, si + index - ni - 1, map);
-        head.right = inPos(n, index + 1, nj, s, si + index - ni, sj - 1, map);
+        Node head = new Node(pos[posLast]);
+        int index = map.get(pos[posLast]);
+        head.left = inPos(in, inFirst, index - 1, pos, posFirst, posFirst + index - inFirst - 1, map);
+        head.right = inPos(in, index + 1, inLast, pos, posFirst + index - inFirst, posLast - 1, map);
         return head;
     }
 
-    // ÿ���ڵ�ĺ�������Ϊ0��2�Ķ��������ܱ�����������ع�����
+    // 每个节点的孩子数都为0或者2的二叉树才能被先序与后序重构出来
     public static Node prePosToTree(int[] pre, int[] pos) {
         if (pre == null || pos == null) {
             return null;
@@ -72,15 +81,14 @@ public class Problem_21_PreInPosArrayToTree {
         return prePos(pre, 0, pre.length - 1, pos, 0, pos.length - 1, map);
     }
 
-    public static Node prePos(int[] p, int pi, int pj, int[] s, int si, int sj,
-                              HashMap<Integer, Integer> map) {
-        Node head = new Node(s[sj--]);
-        if (pi == pj) {
+    public static Node prePos(int[] pre, int preFirst, int preLast, int[] pos, int posFirst, int posLast, HashMap<Integer, Integer> map) {
+        Node head = new Node(pos[posLast--]);
+        if (preFirst == preLast) {
             return head;
         }
-        int index = map.get(p[++pi]);
-        head.left = prePos(p, pi, pi + index - si, s, si, index, map);
-        head.right = prePos(p, pi + index - si + 1, pj, s, index + 1, sj, map);
+        int index = map.get(pre[++preFirst]);
+        head.left = prePos(pre, preFirst, preFirst + index - posFirst, pos, posFirst, index, map);
+        head.right = prePos(pre, preFirst + index - posFirst + 1, preLast, pos, index + 1, posLast, map);
         return head;
     }
 
