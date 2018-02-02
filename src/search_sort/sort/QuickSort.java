@@ -18,12 +18,30 @@ public class QuickSort {
         if (left < right) {
             int index = partition(array, left, right);
             sort(array, left, index - 1);
-            sort(array, index, right);
+            sort(array, index + 1, right);
         }
 
     }
 
-    public int partition(int[] array, int left, int right) {
+    public static int partition(int[] array, int left, int right) {
+        //固定的切分方式
+        int key = array[left];
+        while (left < right) {
+            while (array[right] >= key && right > left) { //从后半部分向前扫描
+                right--;
+            }
+            array[left] = array[right];
+            while (array[left] <= key && right > left) { //从前半部分向后扫描
+                left++;
+            }
+            // 这里一定要用right，因为有一种情况是左边大于右边了；这种情况下用left就出错了。
+            array[right] = array[left];
+        }
+        array[right] = key;
+        return right;
+    }
+
+    public int partition1(int[] array, int left, int right) {
         if (array == null || array.length <= 0 || left < 0 || right >= array.length) {
             return 0;
         }

@@ -47,6 +47,9 @@ public class Problem_02_TwoStacksImplementQueue {
 		test.add(3);
 		System.out.println(test.peek());
 		System.out.println(test.poll());
+		test.add(34);
+		System.out.println(test.peek());
+		System.out.println(test.poll());
 		System.out.println(test.peek());
 		System.out.println(test.poll());
 		System.out.println(test.peek());
