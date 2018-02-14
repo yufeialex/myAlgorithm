@@ -59,9 +59,6 @@ public class Problem_04_CoinsWay {
      * 这个数组中的i和上面记忆搜索的i含义不一样，注意区分。
      *
      * 动态规划计算顺序，记忆搜索不需要。
-     * @param arr
-     * @param aim
-     * @return
      */
     public static int coins3(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
@@ -87,6 +84,7 @@ public class Problem_04_CoinsWay {
         return dp[arr.length - 1][aim];
     }
 
+    // 化简的动态规划O(Nxaim)
     public static int coins4(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
             return 0;
@@ -107,6 +105,7 @@ public class Problem_04_CoinsWay {
         return dp[arr.length - 1][aim];
     }
 
+    // 加了空间压缩
     public static int coins5(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
             return 0;
@@ -117,7 +116,10 @@ public class Problem_04_CoinsWay {
         }
         for (int i = 1; i < arr.length; i++) {
             for (int j = 1; j <= aim; j++) {
-                dp[j] += j - arr[i] >= 0 ? dp[j - arr[i]] : 0;
+//                dp[j] += j - arr[i] >= 0 ? dp[j - arr[i]] : 0; 这种写法装逼，烂透了
+                if(j - arr[i] >= 0) {
+                    dp[j] += dp[j - arr[i]];
+                }
             }
         }
         return dp[aim];
