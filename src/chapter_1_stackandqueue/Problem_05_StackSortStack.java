@@ -14,7 +14,7 @@ public class Problem_05_StackSortStack {
             }
             help.push(cur);
         }
-        while (!help.isEmpty()) {
+        while (!help.isEmpty()) { // 注意要把内容返回原始栈
             stack.push(help.pop());
         }
     }

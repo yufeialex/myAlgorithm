@@ -82,6 +82,23 @@ public class Problem_01_FibonacciProblem {
         return s1(n - 1) + s1(n - 2);
     }
 
+    // 记忆法
+    public static int s4(int n, HashMap<Integer, Integer> map) {
+        if (n < 1) {
+            return 0;
+        }
+        if (n == 1 || n == 2) {
+            return n;
+        }
+        if(map.containsKey(n)) {
+            return map.get(n);
+        } else {
+            int value = s4(n-1, map) + s4(n-2, map);
+            map.put(n, value);
+            return value;
+        }
+    }
+
     // 这种就是动态规划算法！
     public static int s2(int n) {
         if (n < 1) {
@@ -99,24 +116,6 @@ public class Problem_01_FibonacciProblem {
             pre = tmp;
         }
         return res;
-    }
-
-    // 记忆法
-    public static int s4(int n) {
-        if (n < 1) {
-            return 0;
-        }
-        if (n == 1 || n == 2) {
-            return n;
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        if(map.containsKey(n)) {
-            return map.get(n);
-        } else {
-            int value = s4(n-1) + s4(n-2);
-            map.put(n, value);
-            return value;
-        }
     }
 
     public static int s3(int n) {
@@ -185,6 +184,7 @@ public class Problem_01_FibonacciProblem {
         System.out.println(s1(n));
         System.out.println(s2(n));
         System.out.println(s3(n));
+        System.out.println(s4(n, new HashMap<>()));
         System.out.println("===");
 
         System.out.println(c1(n));
