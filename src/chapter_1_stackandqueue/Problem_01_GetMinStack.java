@@ -51,6 +51,7 @@ public class Problem_01_GetMinStack {
         }
 
         public void push(int newNum) {
+            // 注意为空的情况
             if (this.stackMin.isEmpty()) {
                 this.stackMin.push(newNum);
             } else if (newNum < this.getmin()) {
@@ -74,7 +75,7 @@ public class Problem_01_GetMinStack {
             if (this.stackMin.isEmpty()) {
                 throw new RuntimeException("Your stack is empty.");
             }
-            return this.stackMin.peek();
+            return this.stackMin.peek(); // 其实peek自己也会抛异常，上面的异常只是更人性化
         }
     }
 
