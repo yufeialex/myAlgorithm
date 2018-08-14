@@ -5,6 +5,7 @@ public class Problem_23_TrieTree {
 	public static class TrieNode {
 		public int path;
 		public int end;
+		// 这里是用数组做的hash，26个字母，key就是index。但是实际中如果是汉字，那是用真正的hash表来做的。
 		public TrieNode[] map;
 
 		public TrieNode() {
@@ -36,6 +37,7 @@ public class Problem_23_TrieTree {
 				node = node.map[index];
 				node.path++;
 			}
+			// 跳出循环的时候，node就是最后一个结点，path已经在循环里面添加过了
 			node.end++;
 		}
 
