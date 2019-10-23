@@ -9,10 +9,17 @@ public class InsertSort {
         }
     }
 
+    /**
+     * 最优
+     * 从小到大排
+     * 从前向后逐次有序
+     * @param array
+     */
     void sort(int array[]) {
+        // 可以把i理解为轮数
         for (int i = 1; i < array.length; i++) {
-            for (int j = i; j > 0 && Utils.less(array[j], array[j - 1]); j--) {
-                Utils.exec(array, j, j - 1);
+            for (int j = i; j > 0 && array[j] < array[j - 1]; j--) {
+                Utils.swap(array, j, j - 1);
             }
         }
     }
@@ -34,7 +41,6 @@ public class InsertSort {
 
     /**
      * 这个改进下面，下面是我最初写的版本；思考如何一下子写到这个程度
-     * @param array
      */
     void inertionSort(int array[]) // O(n*n)
     {
@@ -52,7 +58,6 @@ public class InsertSort {
     }
 
     // 各种排序从左到右进行和从右到左进行是一致的；只需要写出一种就行
-
     void sort1(int array[]) {
         int current = 0;
         int currentIndex = -1;
